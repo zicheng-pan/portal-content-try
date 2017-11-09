@@ -1,6 +1,113 @@
 <html>
 <head>
     <style>
+    body{
+        font-family:cursive;
+    }
+        #search{
+            font-family: inherit;
+            display:block;
+        }
+        #search form{
+            position:relative;
+            width:580px;
+            margin:0 auto;
+            margin-top:35px;
+            margin-bottom:50px;
+        }
+        #search input{
+
+                width: 100%;
+                height: 42px;
+                padding-left: 10px;
+                border: 2px solid #7BA7AB;
+                border-radius: 5px;
+                outline: none;
+                background: #F9F0DA;
+                color: #9E9C9C;
+
+        }
+        #search button{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 42px;
+            height: 42px;
+            border: none;
+            background: #7BA7AB;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 100%;
+            margin: 0;
+            -webkit-appearance: button;
+            line-height: normal;
+            align-items: flex-start;
+            text-align: center;
+        }
+        #search button:before{
+            content: "?";
+            font-family: FontAwesome;
+            font-size: 16px;
+            color: #F9F0DA;
+        }
+
+        #title{
+            margin:0 auto;
+            width:fit-content;
+            width:-webkit-fit-content;
+            width:-moz-fit-content;
+            margin-top:100px;
+            font-size: 42px;
+            font-family: cursive;
+            text-shadow: 6px 2px 2px #666666;
+        }
+
+        #additem input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+            color:    #fff;
+            font-family:cursive;
+        }
+        #additem input:-moz-placeholder, textarea:-moz-placeholder {
+            color:    #fff;
+            font-family:cursive;
+        }
+        #additem input::-moz-placeholder, textarea::-moz-placeholder {
+            color:    #fff;
+            font-family:cursive;
+        }
+        #additem input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+            color:    #fff;
+            font-family:cursive;
+        }
+
+        #additem{
+            margin:0 auto;
+            width:fit-content;
+            width:-webkit-fit-content;
+            width:-moz-fit-content;
+        }
+        #additem input,button{
+             margin:10px auto;
+             width: 300px;
+             height: 35px;
+             padding-left: 10px;
+             border: 1px solid #9400D3;
+             border-radius: 10px;
+             outline: none;
+             background: #9370DB;
+             color: #fff;
+             font-size:20px;
+             line-height:35px;
+             /*text-align:center;*/
+        }
+
+        #additem button{
+            cursor: pointer;
+        }
+        #additem button:hover{
+             background:  #9932CC;
+             color:red;
+        }
 
 
     </style>
@@ -10,14 +117,24 @@
 <script src="{{url_for('static', filename='jquery.min.js')}}"></script>
 <body>
 
+<div id="title">
+    Content-ZERG
+</div>
 
+<div id="search">
 
-parentNode:<input type="text" name="parentNode" id="parentNode">
-title:<input type="text" name="name" id="name">
-url :<input type="text" name="url" id="url">
-<br>
-<button onclick="right_submit()">submit</button>
+    <form>
+        <input type="text" placeholder="A happly day start from here...">
+        <button type="submit"></button>
+    </form>
+</div>
 
+<div id="additem">
+    <input type="text" name="parentNode" placeholder="parentNode" id="parentNode"><br>
+    <input type="text" placeholder="name" name="name" id="name"><br>
+    <input type="text" placeholder="url" name="url" id="url"><br>
+    <button onclick="right_submit()">submit</button>
+</div>
 </body>
 <script>
 　　 function trim(str){
@@ -48,6 +165,21 @@ url :<input type="text" name="url" id="url">
             }
         }
     }
+
+    $(document).ready(function(){
+        $('#additem>input').focus(function(){
+                $(this).css('border','2px solid #B0C4DE');
+        });
+        $('#additem>input').blur(function(){
+                $(this).css('border','1px solid #9400D3');
+        });
+
+    });
+
+
+
+
+
 
 
 

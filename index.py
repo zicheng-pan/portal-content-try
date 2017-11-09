@@ -39,7 +39,7 @@ def addjson():
                 item["subContent"].append(result)
     else:
         del result["parentNode"]
-        result["subContent"] = []
+        result["subContent"] = "[]"
         all_data.append(result)
 
     with open(json_location,"wb") as f:
