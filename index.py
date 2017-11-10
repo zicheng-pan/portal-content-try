@@ -32,14 +32,29 @@ def addjson():
     data = request.args.get("data")
     result = json.loads(data)
     all_data = json.loads(loadJsonFile())
-    if result["parentNode"].strip() and result["parentNode"].strip() in [child["name"].strip() for child in all_data]:
+    if result["parentNode"].strip() and result["parentNode"].strip() in [child["name"].strip() for child in all_data] and (result["name"] != "" or result["url"] != ""):
         for item in all_data:
             if result["parentNode"].strip() == item["name"]:
-                del result["parentNode"]
-                item["subContent"].append(result)
+                flag = True
+                for sub in item["subContent"]:
+                    if sub["name"] == result["name"] and result["url"] == "":
+                        item["subContent"].remove(sub)
+                        flag = False
+                    elif sub["name"] == result["name"] and result["url"] != "":
+                        sub["url"] = result["url"]
+                        flag = False
+                if flag:
+                    del result["parentNode"]
+                    item["subContent"].append(result)
+
+    elif result["parentNode"].strip() and result["name"].strip() == "" and result["url"].strip() == "" :
+        for item in all_data:
+            if item["name"] == result["parentNode"]:
+                all_data.remove(item)
+
     else:
         del result["parentNode"]
-        result["subContent"] = "[]"
+        result["subContent"] = []
         all_data.append(result)
 
     with open(json_location,"wb") as f:
@@ -56,5 +71,12 @@ def getjson():
     else:
         return "[]"
 
+@app.route("/login")
+def login():
+    print request.args.get("info","")
+    return render_template('admin_login.html')
+
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,host="0.0.0.0")

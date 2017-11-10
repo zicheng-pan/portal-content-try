@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AdminPage</title>
+</head>
+<body>
+    <div>
+        {% if user %}
+            usernmae:<input type="text" name="username" id="username">
+            password:<input type="text" name="password" id="password">
+            <button onclick="submit_info()"></button>
+        {% else %}
+            Welcome,{{user}}
+        {% endif %}
+    </div>
+</body>
+<script>
+    function submit_info(){
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        document.location.href = "login?info:"+username+"/"+password;
+    }
+
+
+</script>
+</html>

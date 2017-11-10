@@ -48,7 +48,7 @@
     class Content{
         constructor(name,url,arr){
             this.name = name;
-            this.url = url;
+            this.url = url == ""?"right":url;
             this.subContent = arr;
         }
         
@@ -102,9 +102,15 @@
         let htmlobj=$.ajax({url:"getjson",async:false});
         let json = JSON.parse(htmlobj.responseText);
         for(let item of json){
-            let subcont = new Content(item.name,item.url,item.subContent);
-            console.log(item.subContent);
-            console.log(subcont.subContent.length);
+        let subcont;
+            if("[]" == item.subContent){
+                let a = [];
+                subcont = new Content(item.name,item.url,a);
+            }
+            else{
+                subcont = new Content(item.name,item.url,item.subContent);
+            }
+
             init_array.push(subcont);
         }
         additems(init_array);
