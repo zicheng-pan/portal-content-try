@@ -57,56 +57,10 @@
         width:fit-content;
         width:-webkit-fit-content;
         width:-moz-fit-content;
-        margin-top:100px;
+        margin-top:50px;
         font-size: 42px;
-        font-family: cursive;
-        text-shadow: 6px 2px 2px #666666;
-        }
-
-        #additem input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-        color:    #fff;
-        font-family:cursive;
-        }
-        #additem input:-moz-placeholder, textarea:-moz-placeholder {
-        color:    #fff;
-        font-family:cursive;
-        }
-        #additem input::-moz-placeholder, textarea::-moz-placeholder {
-        color:    #fff;
-        font-family:cursive;
-        }
-        #additem input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-        color:    #fff;
-        font-family:cursive;
-        }
-
-        #additem{
-        margin:0 auto;
-        width:fit-content;
-        width:-webkit-fit-content;
-        width:-moz-fit-content;
-        }
-        #additem input,button{
-        margin:10px auto;
-        width: 300px;
-        height: 35px;
-        padding-left: 10px;
-        border: 1px solid #9400D3;
-        border-radius: 10px;
-        outline: none;
-        background: #9370DB;
-        color: #fff;
-        font-size:20px;
-        line-height:35px;
-        /*text-align:center;*/
-        }
-
-        #additem button{
-        cursor: pointer;
-        }
-        #additem button:hover{
-        background:  #9932CC;
-        color:red;
+        font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        #text-shadow: 6px 2px 2px #666666;
         }
 
         /* arrow box*/
@@ -199,11 +153,25 @@
 
         /* small details in navigate end*/
 
+
+
+
+    </style>
+
+    <style type="text/css">
+	#clock{
+		font-family: 'Days One',"Microsoft YaHei", Arial,sans-serif;
+		font-size: 2em;
+	}
+
+
+
     </style>
 </head>
 
 <script src="{{url_for('static', filename='browser.min.js')}}"></script>
 <script src="{{url_for('static', filename='jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='jquery.countdown.js')}}"></script>
 <body>
 
 <div id="title">
@@ -224,9 +192,9 @@
 
         <div>
             <div>
-                <a onclick="dropadmin(500,400)">
-                        <!--href="#"
-                        target="_blank"-->
+                <a onclick="dropadmin(550,400)">
+                    <!--href="#"
+                    target="_blank"-->
 
                     <div class="small_details">
 							<span class="small_details_img"
@@ -250,94 +218,62 @@
         <button type="submit"></button>
     </form>
 </div>
-
-<div id="additem">
-    <input type="text" name="parentNode" placeholder="parentNode" id="parentNode"><br>
-    <input type="text" placeholder="name" name="name" id="name"><br>
-    <input type="text" placeholder="url" name="url" id="url"><br>
-    <button onclick="right_submit()">submit</button>
+<div class="zzsc-content bgcolor-8" style="dis">
+    <p>距离2020年1月1日还有：</p>
+    <span id="clock"></span>
 </div>
+
 </body>
 <script>
-　　 function trim(str){
-　　     return str.replace(/(^\s*)|(\s*$)/g, "");
-　　 }
-　　 function ltrim(str){
-　　     return str.replace(/(^\s*)/g,"");
-　　 }
-　　 function rtrim(str){
-　　     return str.replace(/(\s*$)/g,"");
-　　 }
+    $(document).ready(function(){
+    $('.navbutton').on('mouseenter', function(event) {
 
-    function right_submit(){
-        var name = document.getElementById("name").value;
-        var url = document.getElementById("url").value;
-        var parentNode = document.getElementById("parentNode").value;
-        var str_data = `{"parentNode": "${parentNode}","name": "${name}","url":"${url}"}`;
-        if(trim(name) != ""){
-            htmlobj=$.ajax({url:"addjson?data="+str_data,async:false});
-            if(htmlobj.responseText=="success"){
-                document.getElementById("name").value = "";
-                document.getElementById("url").value = "";
-                document.getElementById("parentNode").value = "";
-                // use frameset to control another document to reload
-                var left=window.parent.window.document.getElementById("left");
-
-                left.contentWindow.document.location.reload();
-            }
-        }
-        else if(trim(parentNode) != "" && trim(url)=="" && trim(name)==""){
-            window.confirm("would you like to delete parent node !!!");
-            htmlobj=$.ajax({url:"addjson?data="+str_data,async:false});
-            if(htmlobj.responseText=="success"){
-                document.getElementById("name").value = "";
-                document.getElementById("url").value = "";
-                document.getElementById("parentNode").value = "";
-                // use frameset to control another document to reload
-                var left=window.parent.window.document.getElementById("left");
-
-                left.contentWindow.document.location.reload();
-
-            }
-        }
+    if ($('.arrow_box').css('display') == 'none') {
+    $('.arrow_box').css({
+    display : 'block'
+    });
+    } else {
+    $('.arrow_box').css({
+    display : 'none'
+    });
     }
 
-    $(document).ready(function(){
-        $('#additem>input').focus(function(){
-                $(this).css('border','2px solid #B0C4DE');
-        });
-        $('#additem>input').blur(function(){
-                $(this).css('border','1px solid #9400D3');
-        });
+    });
 
-		$('.navbutton').on('mouseenter', function(event) {
-
-			if ($('.arrow_box').css('display') == 'none') {
-				$('.arrow_box').css({
-					display : 'block'
-				});
-			} else {
-				$('.arrow_box').css({
-					display : 'none'
-				});
-			}
-
-		});
-
-        $('.arrow_box').on('mouseleave', function(event){
-            $('.arrow_box').css({
-                display : 'none'
-            });
-        });
+    $('.arrow_box').on('mouseleave', function(event){
+    $('.arrow_box').css({
+    display : 'none'
+    });
+    });
 
     });
 
     let dropadmin = (iWidth,iHeight)=>{
-        var iTop = (window.screen.availHeight - 30 - iHeight) / 2;
-        var iLeft = (window.screen.availWidth - 10 - iWidth) / 2;
-        returnCode = window.open('login','newwindow','height=' + iHeight + ',innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ',status=no,toolbar=no,menubar=no,location=no,resizable=no,scrollbars=0,titlebar=no');
-
+    var iTop = (window.screen.availHeight  - iHeight) / 2;
+    var iLeft = (window.screen.availWidth  - iWidth) / 2;
+    $windowObj = window.open('login','_blank','height=' + iHeight + ',innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ',status=no,toolbar=no,menubar=no,location=no,resizable=no,scrollbars=0,titlebar=no');
+    var loop = setInterval(function() {
+    if($windowObj  != null && $windowObj.closed) {
+    clearInterval(loop);
+    //do something 在这里执行回调
+    refreshleft();
     }
+    }, 800);
+    }
+
+    $('#clock').countdown('2020/1/1', function(event) {
+    $(this).html(event.strftime('%D 天 %H:%M:%S'));
+    });
+
+    function refreshleft(){
+    // use frameset to control another document to reload
+    var left=window.parent.window.document.getElementById("left");
+    left.contentWindow.document.location.reload();
+    }
+
+</script>
+
+<script type="text/javascript">
 
 </script>
 </html>
