@@ -73,14 +73,8 @@ def getjson():
 
 @app.route("/login")
 def login():
-    info = request.args.get("info","null")
-    user = "null"
-    if info and info != "null":
-        if info.split('/')[0] == "zerg" and info.split('/')[1] == "zerg":
-            user = "zerg"
-        else:
-            user = "fail"
-    return render_template('admin_login.html',user=user)
+    print request.args.get("info","")
+    return render_template('admin_login.html')
 
 
 
